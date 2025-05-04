@@ -1,24 +1,10 @@
-{{
-    config(
-        materialized='table'
-    )
-}}
-
 with customers as (
-
-    select 
-        customer_id,
-        first_name,
-        last_name
+    select *
     from {{ ref('stg_jaffle_shop__customers') }}
 ),
 
 orders as (
-    select 
-        order_id,
-        customer_id,
-        order_date,
-        status
+    select *
     from {{ ref('stg_jaffle_shop__orders') }}
 
 ),
@@ -49,4 +35,4 @@ final as (
     left join customer_orders using (customer_id)
 
 )
-select * from final;
+select * from final
